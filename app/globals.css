@@ -19,6 +19,7 @@
         var(--font-sans), ui-sans-serif, system-ui, sans-serif,
         "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
         "Noto Color Emoji";
+    --font-serif: var(--font-serif), ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
 
     --color-border: hsl(var(--border));
     --color-input: hsl(var(--input));
@@ -105,65 +106,74 @@
 
 @layer base {
     :root {
+        /* Eri in Germany brand colors */
+        --brand-orange: #ff2c00;
+        --brand-orange-light: #ff6900;
+        --brand-beige: #f0e9e3;
+        --brand-beige-light: #f7f4f1;
+        --brand-dark: #181415;
+
         --background: 0 0% 100%;
-        --foreground: 0 0% 3.9%;
+        --foreground: 8 8% 9%; /* #181415 */
 
         --card: 0 0% 100%;
-        --card-foreground: 0 0% 3.9%;
+        --card-foreground: 8 8% 9%;
 
         --popover: 0 0% 100%;
-        --popover-foreground: 0 0% 3.9%;
+        --popover-foreground: 8 8% 9%;
 
-        --primary: 0 0% 9%;
-        --primary-foreground: 0 0% 98%;
+        /* Orange-red primary */
+        --primary: 10 100% 50%; /* #ff2c00 */
+        --primary-foreground: 0 0% 100%;
 
-        --secondary: 0 0% 96.1%;
-        --secondary-foreground: 0 0% 9%;
+        /* Beige secondary */
+        --secondary: 24 33% 92%; /* #f0e9e3 */
+        --secondary-foreground: 8 8% 9%;
 
-        --muted: 0 0% 96.1%;
-        --muted-foreground: 0 0% 45.1%;
+        --muted: 30 20% 96%; /* #f7f4f1 */
+        --muted-foreground: 8 8% 40%;
 
-        --accent: 0 0% 96.1%;
-        --accent-foreground: 0 0% 9%;
+        --accent: 24 33% 92%; /* #f0e9e3 */
+        --accent-foreground: 8 8% 9%;
 
         --destructive: 0 84.2% 60.2%;
         --destructive-foreground: 0 0% 98%;
 
-        --border: 0 0% 89.8%;
-        --input: 0 0% 89.8%;
-        --ring: 0 0% 3.9%;
+        --border: 24 20% 88%;
+        --input: 24 20% 88%;
+        --ring: 10 100% 50%;
 
-        --radius: 0.5rem;
+        --radius: 0.75rem;
     }
 
     .dark {
-        --background: 0 0% 3.9%;
-        --foreground: 0 0% 98%;
+        --background: 8 8% 9%;
+        --foreground: 30 20% 96%;
 
-        --card: 0 0% 3.9%;
-        --card-foreground: 0 0% 98%;
+        --card: 8 8% 12%;
+        --card-foreground: 30 20% 96%;
 
-        --popover: 0 0% 3.9%;
-        --popover-foreground: 0 0% 98%;
+        --popover: 8 8% 9%;
+        --popover-foreground: 30 20% 96%;
 
-        --primary: 0 0% 98%;
-        --primary-foreground: 0 0% 9%;
+        --primary: 10 100% 55%;
+        --primary-foreground: 0 0% 100%;
 
-        --secondary: 0 0% 14.9%;
-        --secondary-foreground: 0 0% 98%;
+        --secondary: 8 8% 18%;
+        --secondary-foreground: 30 20% 96%;
 
-        --muted: 0 0% 14.9%;
-        --muted-foreground: 0 0% 63.9%;
+        --muted: 8 8% 18%;
+        --muted-foreground: 24 20% 65%;
 
-        --accent: 0 0% 14.9%;
-        --accent-foreground: 0 0% 98%;
+        --accent: 8 8% 18%;
+        --accent-foreground: 30 20% 96%;
 
         --destructive: 0 62.8% 30.6%;
         --destructive-foreground: 0 0% 98%;
 
-        --border: 0 0% 14.9%;
-        --input: 0 0% 14.9%;
-        --ring: 0 0% 83.1%;
+        --border: 8 8% 20%;
+        --input: 8 8% 20%;
+        --ring: 10 100% 55%;
     }
 }
 

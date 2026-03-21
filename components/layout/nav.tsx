@@ -1,10 +1,6 @@
-import { Button } from "@/components/ui/button";
 import { MobileNav } from "@/components/nav/mobile-nav";
 import { mainMenu } from "@/menu.config";
-import { siteConfig } from "@/site.config";
 import { cn } from "@/lib/utils";
-import Logo from "@/public/logo.svg";
-import Image from "next/image";
 import Link from "next/link";
 
 interface NavProps {
@@ -16,43 +12,46 @@ interface NavProps {
 export function Nav({ className, children, id }: NavProps) {
   return (
     <nav
-      className={cn("sticky z-50 top-0 bg-background", "border-b", className)}
+      className={cn(
+        "sticky z-50 top-0 bg-white/95 backdrop-blur-sm border-b border-[#f0e9e3]",
+        className
+      )}
       id={id}
     >
       <div
         id="nav-container"
-        className="max-w-5xl mx-auto py-4 px-6 sm:px-8 flex justify-between items-center"
+        className="max-w-6xl mx-auto py-4 px-6 flex justify-between items-center"
       >
-        <Link
-          className="hover:opacity-75 transition-all flex gap-4 items-center"
-          href="/"
-        >
-          <Image
-            src={Logo}
-            alt="Logo"
-            loading="eager"
-            className="dark:invert"
-            width={42}
-            height={26.44}
-          />
-          <h2 className="text-sm">{siteConfig.site_name}</h2>
+        {/* Logo */}
+        <Link className="hover:opacity-75 transition-all shrink-0" href="/">
+          <span className="font-serif italic text-xl text-[#181415]">
+            Eri in Germany
+          </span>
         </Link>
+
         {children}
-        <div className="flex items-center gap-2">
-          <div className="mx-2 hidden md:flex">
-            {Object.entries(mainMenu).map(([key, href]) => (
-              <Button key={href} asChild variant="ghost" size="sm">
-                <Link href={href}>
-                  {key.charAt(0).toUpperCase() + key.slice(1)}
-                </Link>
-              </Button>
-            ))}
-          </div>
-          <Button asChild className="hidden sm:flex">
-            <Link href="https://github.com/9d8dev/next-wp">Get Started</Link>
-          </Button>
-          <MobileNav />
+
+        {/* Desktop nav */}
+        <div className="hidden md:flex items-center gap-1">
+          {Object.entries(mainMenu).map(([key, href]) => (
+            <Link
+              key={href}
+              href={href}
+              className="font-serif italic text-[15px] px-3 py-1.5 text-[#181415] hover:text-[#ff2c00] transition-colors"
+            >
+              {key.charAt(0).toUpperCase() + key.slice(1)}
+            </Link>
+          ))}
+          <Link
+            href="/pages/collaborate-with-eri-in-germany"
+            className="ml-3 bg-[#ff2c00] text-white font-sans text-sm px-5 py-2 rounded-full hover:bg-[#ff6900] transition-colors"
+          >
+            Collaborate Now
+          </Link>
         </div>
+
+        {/* Mobile nav */}
+        <MobileNav />
       </div>
     </nav>
   );

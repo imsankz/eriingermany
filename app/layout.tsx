@@ -1,6 +1,6 @@
 import "./globals.css";
 
-import { Inter as FontSans } from "next/font/google";
+import { Rubik, Sorts_Mill_Goudy } from "next/font/google";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import { Nav } from "@/components/layout/nav";
 import { Footer } from "@/components/layout/footer";
@@ -11,18 +11,31 @@ import { cn } from "@/lib/utils";
 
 import type { Metadata } from "next";
 
-const font = FontSans({
+const fontSans = Rubik({
   subsets: ["latin"],
   variable: "--font-sans",
 });
 
+const fontSerif = Sorts_Mill_Goudy({
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
+  variable: "--font-serif",
+});
+
 export const metadata: Metadata = {
-  title: "WordPress & Next.js Starter by 9d8",
-  description:
-    "A starter template for Next.js with WordPress as a headless CMS.",
+  title: {
+    default: `${siteConfig.site_name} | Lifestyle Blogger sharing Life in Germany`,
+    template: `%s | ${siteConfig.site_name}`,
+  },
+  description: siteConfig.site_description,
   metadataBase: new URL(siteConfig.site_domain),
   alternates: {
     canonical: "/",
+  },
+  openGraph: {
+    siteName: siteConfig.site_name,
+    type: "website",
   },
 };
 
@@ -34,11 +47,16 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head />
-      <body className={cn("min-h-screen font-sans antialiased", font.variable)}>
+      <body
+        className={cn(
+          "min-h-screen font-sans antialiased",
+          fontSans.variable,
+          fontSerif.variable
+        )}
+      >
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
-          enableSystem
+          defaultTheme="light"
           disableTransitionOnChange
         >
           <Nav />
