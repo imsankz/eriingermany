@@ -96,13 +96,13 @@ export default function ServicesPage() {
 
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
             <Link
-              href="/pages/contact"
+              href="/contact"
               className="font-sans inline-flex items-center gap-2 rounded-full bg-[#181415] px-7 py-3.5 text-sm font-semibold text-white shadow-lg transition-all hover:bg-[#ff2c00] hover:shadow-[0_6px_20px_rgba(255,44,0,0.35)] hover:scale-[1.02]"
             >
               Start a Project <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
-              href="/pages/portfolio"
+              href="/portfolio"
               className="font-sans inline-flex items-center gap-2 rounded-full border border-[#181415]/25 text-[#181415] px-7 py-3.5 text-sm font-semibold transition-all hover:border-[#ff2c00] hover:text-[#ff2c00]"
             >
               View Portfolio
@@ -195,7 +195,7 @@ export default function ServicesPage() {
 
                 <div className={`mt-8 pt-6 border-t ${service.featured ? "border-white/10" : "border-[#181415]/8"}`}>
                   <Link
-                    href="/pages/contact"
+                    href="/contact"
                     className={`font-sans inline-flex w-full items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all hover:scale-[1.02] ${
                       service.featured
                         ? "bg-[#ff2c00] text-white shadow-md shadow-[#ff2c00]/30 hover:bg-[#e02600]"
@@ -293,7 +293,7 @@ export default function ServicesPage() {
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4">
             <Link
-              href="/pages/contact"
+              href="/contact"
               className="font-sans bg-white text-[#ff2c00] font-semibold text-sm px-9 py-4 rounded-full hover:bg-[#181415] hover:text-white transition-all duration-300 inline-flex items-center gap-2 group shadow-xl shadow-black/20"
             >
               Get in Touch <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />

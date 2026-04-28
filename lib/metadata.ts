@@ -5,7 +5,7 @@ interface ContentMetadataOptions {
   title: string;
   description: string;
   slug: string;
-  basePath: "posts" | "pages";
+  basePath?: string;
 }
 
 export function generateContentMetadata({
@@ -25,7 +25,7 @@ export function generateContentMetadata({
       title,
       description,
       type: "article",
-      url: `${siteConfig.site_domain}/${basePath}/${slug}`,
+      url: `${siteConfig.site_domain}/${basePath ? `${basePath}/` : ""}${slug}`,
       images: [
         {
           url: ogUrl.toString(),

@@ -18,7 +18,15 @@
       "Bash(pnpm install:*)",
       "Bash(npm install:*)",
       "Bash(npm run:*)",
-      "Bash(git:*)"
+      "Bash(git:*)",
+      "Bash(pkill -f \"next dev\")",
+      "Bash(pkill -f \"node\")",
+      "Bash(lsof -ti:3000)",
+      "Bash(xargs kill *)",
+      "Bash(curl -s \"https://eriingermany.com/wp-json/wp/v2/media?per_page=100&media_type=image&_fields=source_url&page=3\")",
+      "Bash(python3 -c ' *)",
+      "Bash(pnpm dev *)",
+      "Bash(curl -s http://localhost:3000)"
     ],
     "deny": [],
     "ask": []

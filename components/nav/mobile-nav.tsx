@@ -1,104 +1,162 @@
 "use client";
 
-// React and Next Imports
 import * as React from "react";
-import Link, { LinkProps } from "next/link";
-import { useRouter } from "next/navigation";
-
-// Utility Imports
-import { Menu, ArrowRightSquare } from "lucide-react";
-import { cn } from "@/lib/utils";
-
-// Component Imports
-import { Button } from "@/components/ui/button";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import {
-  Sheet,
-  SheetContent,
-  SheetTrigger,
-  SheetTitle,
-  SheetHeader,
-} from "@/components/ui/sheet";
-import { Separator } from "@/components/ui/separator";
-
+import Link from "next/link";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
+import { X, ArrowUpRight } from "lucide-react";
 import { mainMenu, contentMenu } from "@/menu.config";
-import { siteConfig } from "@/site.config";
 
 export function MobileNav() {
   const [open, setOpen] = React.useState(false);
+  const pathname = usePathname();
+
+  React.useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
+
+  React.useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
 
   return (
-    <Sheet open={open} onOpenChange={setOpen}>
-      <SheetTrigger asChild>
-        <Button
-          variant="ghost"
-          className="px-0 border w-10 text-base hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 md:hidden"
+    <>
+      {/* Hamburger — two asymmetric bars */}
+      <button
+        onClick={() => setOpen(true)}
+        className="md:hidden flex flex-col gap-[5px] items-end justify-center w-10 h-10 group"
+        aria-label="Open menu"
+      >
+        <span className="block w-5 h-[1.5px] bg-[#181415]/70 group-hover:bg-[#ff2c00] transition-all duration-200 group-hover:w-6" />
+        <span className="block w-3.5 h-[1.5px] bg-[#181415]/70 group-hover:bg-[#ff2c00] transition-all duration-200 group-hover:w-6" />
+      </button>
+
+      {/* Full-screen overlay */}
+      <div
+        className={`fixed inset-0 z-[60] flex flex-col bg-[#181415] transition-opacity duration-300 ${
+          open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        }`}
+      >
+        {/* Top bar */}
+        <div className="flex items-center justify-between px-6 pt-5 pb-4 shrink-0">
+          <Link
+            href="/"
+            onClick={() => setOpen(false)}
+            className="flex items-center gap-2.5"
+          >
+            <Image
+              src="/eri-logo.png"
+              alt="Eri in Germany"
+              width={36}
+              height={36}
+              className="object-contain"
+            />
+            <span className="font-serif italic text-white text-[1rem]">
+              Eri in Germany
+            </span>
+          </Link>
+          <button
+            onClick={() => setOpen(false)}
+            className="w-10 h-10 flex items-center justify-center rounded-full border border-white/15 text-white/50 hover:text-white hover:border-white/30 transition-all duration-200"
+            aria-label="Close menu"
+          >
+            <X className="h-4 w-4" />
+          </button>
+        </div>
+
+        {/* Thin rule */}
+        <div
+          className="h-px mx-6 bg-white/10 transition-all duration-300"
+          style={{ opacity: open ? 1 : 0, transitionDelay: open ? "80ms" : "0ms" }}
+        />
+
+        {/* Main links — editorial large type */}
+        <nav className="flex-1 flex flex-col justify-center px-7 gap-0">
+          {Object.entries(mainMenu).map(([key, href], i) => {
+            const isActive =
+              pathname === href || (href !== "/" && pathname.startsWith(href));
+            return (
+              <Link
+                key={href}
+                href={href}
+                onClick={() => setOpen(false)}
+                className={`group flex items-center justify-between font-serif italic leading-[1.1] py-[14px] border-b border-white/[0.07] transition-all duration-500 ${
+                  isActive
+                    ? "text-[#ff2c00]"
+                    : "text-white/70 hover:text-white"
+                } ${
+                  open ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
+                }`}
+                style={{
+                  fontSize: "clamp(2rem, 8vw, 2.6rem)",
+                  transitionDelay: open ? `${100 + i * 55}ms` : "0ms",
+                }}
+              >
+                <span>{key.charAt(0).toUpperCase() + key.slice(1)}</span>
+                <ArrowUpRight
+                  className={`h-5 w-5 shrink-0 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200 ${
+                    isActive ? "opacity-50 translate-x-0" : ""
+                  }`}
+                />
+              </Link>
+            );
+          })}
+        </nav>
+
+        {/* Bottom section */}
+        <div
+          className={`px-6 pb-8 pt-5 shrink-0 transition-all duration-500 ${
+            open ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+          }`}
+          style={{ transitionDelay: open ? "420ms" : "0ms" }}
         >
-          <Menu />
-          <span className="sr-only">Toggle Menu</span>
-        </Button>
-      </SheetTrigger>
-      <SheetContent side="left" className="pr-0">
-        <SheetHeader>
-          <SheetTitle className="text-left">
-            <MobileLink
-              href="/"
-              className="flex items-center"
-              onOpenChange={setOpen}
-            >
-              <ArrowRightSquare className="mr-2 h-4 w-4" />
-              <span>{siteConfig.site_name}</span>
-            </MobileLink>
-          </SheetTitle>
-        </SheetHeader>
-        <ScrollArea className="my-4 h-[calc(100vh-8rem)] pb-10 pl-6">
-          <div className="flex flex-col space-y-3">
-            <h3 className="text-small mt-6">Menu</h3>
-            <Separator />
-            {Object.entries(mainMenu).map(([key, href]) => (
-              <MobileLink key={key} href={href} onOpenChange={setOpen}>
-                {key.charAt(0).toUpperCase() + key.slice(1)}
-              </MobileLink>
-            ))}
-            <h3 className="text-small pt-6">Blog Menu</h3>
-            <Separator />
+          {/* Secondary links */}
+          <div className="flex items-center gap-5 mb-5">
             {Object.entries(contentMenu).map(([key, href]) => (
-              <MobileLink key={key} href={href} onOpenChange={setOpen}>
+              <Link
+                key={href}
+                href={href}
+                onClick={() => setOpen(false)}
+                className="font-sans text-[10px] uppercase tracking-[0.2em] text-white/30 hover:text-white/60 transition-colors"
+              >
                 {key.charAt(0).toUpperCase() + key.slice(1)}
-              </MobileLink>
+              </Link>
             ))}
           </div>
-        </ScrollArea>
-      </SheetContent>
-    </Sheet>
-  );
-}
 
-interface MobileLinkProps extends LinkProps {
-  onOpenChange?: (open: boolean) => void;
-  children: React.ReactNode;
-  className?: string;
-}
+          {/* CTA */}
+          <Link
+            href="/collaborate-with-eri-in-germany"
+            onClick={() => setOpen(false)}
+            className="flex items-center justify-center gap-2 w-full bg-[#ff2c00] text-white font-sans font-semibold text-sm px-6 py-4 rounded-full hover:bg-[#e52900] transition-all duration-200 shadow-lg shadow-[#ff2c00]/20"
+          >
+            Collaborate Now
+            <ArrowUpRight className="h-4 w-4" />
+          </Link>
 
-function MobileLink({
-  href,
-  onOpenChange,
-  className,
-  children,
-  ...props
-}: MobileLinkProps) {
-  const router = useRouter();
-  return (
-    <Link
-      href={href}
-      onClick={() => {
-        router.push(href.toString());
-        onOpenChange?.(false);
-      }}
-      className={cn("text-lg", className)}
-      {...props}
-    >
-      {children}
-    </Link>
+          {/* Social */}
+          <div className="mt-5 flex justify-center gap-5">
+            {[
+              { label: "Instagram", href: "https://www.instagram.com/ertiqua" },
+              { label: "YouTube", href: "https://www.youtube.com/@EriInGermany" },
+              { label: "Twitter", href: "https://twitter.com/ertiqua" },
+            ].map(({ label, href }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-sans text-[10px] uppercase tracking-[0.2em] text-white/22 hover:text-white/55 transition-colors"
+              >
+                {label}
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </>
   );
 }

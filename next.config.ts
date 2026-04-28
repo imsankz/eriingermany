@@ -14,6 +14,27 @@ const nextConfig: NextConfig = {
         port: "",
         pathname: "/**",
       },
+      // YouTube thumbnails
+      {
+        protocol: "https",
+        hostname: "i.ytimg.com",
+        port: "",
+        pathname: "/**",
+      },
+      // WordPress origin (fallback for non-CDN URLs)
+      {
+        protocol: "https",
+        hostname: "eriingermany.com",
+        port: "",
+        pathname: "/**",
+      },
+      // Gravatar avatars (author profile images)
+      {
+        protocol: "https",
+        hostname: "secure.gravatar.com",
+        port: "",
+        pathname: "/**",
+      },
       ...(wordpressHostname
         ? [
             {
@@ -27,15 +48,13 @@ const nextConfig: NextConfig = {
     ],
   },
   async redirects() {
-    if (!wordpressUrl) {
-      return [];
-    }
+    const base = wordpressUrl
+      ? [{ source: "/admin", destination: `${wordpressUrl}/wp-admin`, permanent: true }]
+      : [];
     return [
-      {
-        source: "/admin",
-        destination: `${wordpressUrl}/wp-admin`,
-        permanent: true,
-      },
+      ...base,
+      { source: "/posts/:slug", destination: "/:slug", permanent: true },
+      { source: "/pages/:slug", destination: "/:slug", permanent: true },
     ];
   },
 };

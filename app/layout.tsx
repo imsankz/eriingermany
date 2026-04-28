@@ -4,6 +4,7 @@ import { Rubik, Sorts_Mill_Goudy } from "next/font/google";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import { Nav } from "@/components/layout/nav";
 import { Footer } from "@/components/layout/footer";
+import { NewsletterStrip } from "@/components/layout/NewsletterStrip";
 import { Analytics } from "@vercel/analytics/react";
 
 import { siteConfig } from "@/site.config";
@@ -61,6 +62,7 @@ export default function RootLayout({
         >
           <Nav />
           {children}
+          <NewsletterStrip />
           <Footer />
         </ThemeProvider>
         <Analytics />

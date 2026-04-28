@@ -64,7 +64,7 @@ export default function PortfolioPage() {
 
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
             <Link
-              href="/pages/collaborate-with-eri-in-germany"
+              href="/collaborate-with-eri-in-germany"
               className="font-sans inline-flex items-center gap-2 rounded-full bg-[#181415] px-7 py-3.5 text-sm font-semibold text-white shadow-lg transition-all hover:bg-[#ff2c00] hover:shadow-[0_6px_20px_rgba(255,44,0,0.35)] hover:scale-[1.02]"
             >
               Work with me <ArrowRight className="h-4 w-4" />
@@ -256,7 +256,7 @@ export default function PortfolioPage() {
             Let&apos;s collaborate to bring authentic stories and premium UGC to your brand.
           </p>
           <Link
-            href="/pages/collaborate-with-eri-in-germany"
+            href="/collaborate-with-eri-in-germany"
             className="font-sans bg-white text-[#ff2c00] font-semibold text-sm px-9 py-4 rounded-full hover:bg-[#181415] hover:text-white transition-all duration-300 inline-flex items-center gap-2 group shadow-xl shadow-black/20"
           >
             Collaborate Now <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />

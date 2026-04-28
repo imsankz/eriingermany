@@ -59,7 +59,7 @@ export default async function Home() {
                 Read the Blog <ArrowRight className="h-3.5 w-3.5" />
               </Link>
               <Link
-                href="/pages/collaborate-with-eri-in-germany"
+                href="/collaborate-with-eri-in-germany"
                 className="border border-[#181415]/25 text-[#181415] font-sans text-sm px-7 py-3.5 rounded-full hover:border-[#ff2c00] hover:text-[#ff2c00] transition-all duration-300"
               >
                 Work With Me
@@ -67,15 +67,15 @@ export default async function Home() {
             </div>
 
             {/* Social proof mini-strip */}
-            <div className="mt-12 flex items-center gap-6 border-t border-[#181415]/8 pt-8">
+            <div className="mt-12 grid grid-cols-3 gap-4 border-t border-[#181415]/8 pt-8">
               {[
                 { value: "194.3K", label: "Followers" },
                 { value: "3.2%", label: "Engagement" },
                 { value: "6+", label: "Years in Germany" },
               ].map(({ value, label }) => (
-                <div key={label}>
-                  <p className="font-sans text-[1.25rem] font-bold text-[#181415]">{value}</p>
-                  <p className="font-sans text-[11px] uppercase tracking-widest text-[#181415]/50 mt-0.5">{label}</p>
+                <div key={label} className="group">
+                  <p className="font-serif italic text-[2rem] font-bold text-[#181415] leading-none group-hover:text-[#ff2c00] transition-colors duration-300">{value}</p>
+                  <p className="font-sans text-[11px] uppercase tracking-widest text-[#181415]/45 mt-1.5">{label}</p>
                 </div>
               ))}
             </div>
@@ -132,7 +132,7 @@ export default async function Home() {
                 alt={logo.alt}
                 width={100}
                 height={40}
-                className="h-9 w-auto object-contain opacity-40 grayscale hover:opacity-90 hover:grayscale-0 transition-all duration-300"
+                className="h-16 w-auto object-contain opacity-90 transition-all duration-300 hover:opacity-100 hover:scale-105"
               />
             ))}
           </div>
@@ -157,7 +157,7 @@ export default async function Home() {
               bureaucratic ones.
             </p>
             <Link
-              href="/pages/about"
+              href="/about"
               className="inline-flex items-center gap-2 font-sans text-sm text-[#181415] hover:text-[#ff2c00] transition-colors group"
             >
               More about me
@@ -202,7 +202,7 @@ export default async function Home() {
               </div>
             ))}
             <Link
-              href="/pages/collaborate-with-eri-in-germany"
+              href="/collaborate-with-eri-in-germany"
               className="inline-flex items-center gap-2 mt-2 font-sans text-sm text-[#ff2c00] hover:text-[#ff6900] transition-colors group"
             >
               See all services
@@ -306,7 +306,7 @@ export default async function Home() {
             </h2>
           </div>
           <Link
-            href="/pages/portfolio"
+            href="/portfolio"
             className="shrink-0 border border-white/20 text-white font-sans text-sm px-8 py-3.5 rounded-full hover:bg-[#ff2c00] hover:border-[#ff2c00] transition-all duration-300 flex items-center gap-2 group hover:shadow-[0_6px_20px_rgba(255,44,0,0.35)]"
           >
             View Portfolio
@@ -318,8 +318,11 @@ export default async function Home() {
       {/* ── COLLABORATE CTA ──────────────────────────────────────────── */}
       <section className="relative overflow-hidden py-24 bg-[#ff2c00]">
         {/* Noise texture overlay */}
-        <div className="pointer-events-none absolute inset-0 opacity-[0.04] mix-blend-overlay" style={{
+        <div className="pointer-events-none absolute inset-0 opacity-[0.12] mix-blend-overlay" style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`
+        }} />
+        <div className="pointer-events-none absolute inset-0" style={{
+          backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(255,255,255,0.03) 40px, rgba(255,255,255,0.03) 41px)`
         }} />
         <div className="max-w-2xl mx-auto px-6 text-center relative">
           <h2 className="font-serif italic text-[clamp(2.5rem,5vw,4rem)] text-white mb-5 leading-tight">
@@ -330,7 +333,7 @@ export default async function Home() {
             visuals and social media campaigns.
           </p>
           <Link
-            href="/pages/collaborate-with-eri-in-germany"
+            href="/collaborate-with-eri-in-germany"
             className="bg-white text-[#ff2c00] font-sans font-semibold text-sm px-9 py-4 rounded-full hover:bg-[#181415] hover:text-white transition-all duration-300 inline-flex items-center gap-2 group shadow-xl shadow-black/20"
           >
             Collaborate Now
@@ -358,8 +361,8 @@ function FeaturedPostCard({ post }: { post: Post }) {
     >
       {featuredImage?.source_url && (
         <div
-          className="relative w-full aspect-video overflow-hidden shadow-xl shadow-[#181415]/10"
-          style={{ borderRadius: "20px 60px 20px 60px" }}
+          className="relative w-full aspect-video overflow-hidden rounded-3xl shadow-xl shadow-[#181415]/10"
+          style={{}}
         >
           <Image
             src={featuredImage.source_url}

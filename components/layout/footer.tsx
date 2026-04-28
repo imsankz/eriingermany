@@ -86,8 +86,8 @@ export function Footer() {
             Work with me
           </h5>
           {[
-            { label: "Collaborate", href: "/pages/collaborate-with-eri-in-germany" },
-            { label: "Portfolio", href: "/pages/portfolio" },
+            { label: "Collaborate", href: "/collaborate-with-eri-in-germany" },
+            { label: "Portfolio", href: "/portfolio" },
             { label: "Media Kit", href: "https://beacons.ai/ertiqua/mediakit" },
             { label: "Categories", href: "/posts/categories" },
             { label: "Tags", href: "/posts/tags" },

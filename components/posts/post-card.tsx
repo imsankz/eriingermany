@@ -1,64 +1,42 @@
 import Image from "next/image";
 import Link from "next/link";
-
 import { Post } from "@/lib/wordpress.d";
-import { cn } from "@/lib/utils";
-import { truncateHtml } from "@/lib/metadata";
 
 export function PostCard({ post }: { post: Post }) {
-  // Use embedded data instead of separate API calls
   const media = post._embedded?.["wp:featuredmedia"]?.[0] ?? null;
   const category = post._embedded?.["wp:term"]?.[0]?.[0] ?? null;
   const date = new Date(post.date).toLocaleDateString("en-US", {
-    month: "long",
+    month: "short",
     day: "numeric",
     year: "numeric",
   });
 
   return (
-    <Link
-      href={`/posts/${post.slug}`}
-      className={cn(
-        "border p-4 bg-accent/30 rounded-lg group flex justify-between flex-col not-prose gap-8",
-        "hover:bg-accent/75 transition-all"
-      )}
-    >
-      <div className="flex flex-col gap-4">
-        <div className="h-48 w-full overflow-hidden relative rounded-md border flex items-center justify-center bg-muted">
-          {media?.source_url ? (
-            <Image
-              className="h-full w-full object-cover"
-              src={media.source_url}
-              alt={post.title?.rendered || "Post thumbnail"}
-              width={400}
-              height={200}
-            />
-          ) : (
-            <div className="flex items-center justify-center w-full h-full text-muted-foreground">
-              No image available
-            </div>
-          )}
-        </div>
-        <div
-          dangerouslySetInnerHTML={{
-            __html: post.title?.rendered || "Untitled Post",
-          }}
-          className="text-xl text-primary font-medium group-hover:underline decoration-muted-foreground underline-offset-4 decoration-dotted transition-all"
-        ></div>
-        <div className="text-sm">
-          {post.excerpt?.rendered
-            ? truncateHtml(post.excerpt.rendered, 12)
-            : "No excerpt available"}
-        </div>
+    <Link href={`/posts/${post.slug}`} className="group flex flex-col">
+      <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-[#f0e9e3] mb-4 shadow-sm">
+        {media?.source_url ? (
+          <Image
+            src={media.source_url}
+            alt={media.alt_text || post.title?.rendered || "Post image"}
+            fill
+            className="object-cover group-hover:scale-[1.05] transition-transform duration-500"
+          />
+        ) : (
+          <div className="absolute inset-0 bg-[#f0e9e3]" />
+        )}
+        <div className="absolute inset-0 bg-[#ff2c00]/0 group-hover:bg-[#ff2c00]/6 transition-colors duration-300" />
       </div>
 
-      <div className="flex flex-col gap-4">
-        <hr />
-        <div className="flex justify-between items-center text-xs">
-          <p>{category?.name || "Uncategorized"}</p>
-          <p>{date}</p>
-        </div>
-      </div>
+      {category && (
+        <span className="font-sans text-[11.5px] uppercase tracking-[0.18em] text-[#ff2c00] mb-1.5">
+          {category.name}
+        </span>
+      )}
+      <h3
+        className="font-serif italic text-[1.1rem] text-[#181415] leading-snug mb-2 group-hover:text-[#ff2c00] transition-colors duration-200 line-clamp-2"
+        dangerouslySetInnerHTML={{ __html: post.title?.rendered || "Untitled" }}
+      />
+      <p className="font-sans text-[12px] text-[#181415]/40 mt-auto">{date}</p>
     </Link>
   );
 }

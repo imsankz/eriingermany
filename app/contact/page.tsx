@@ -201,13 +201,13 @@ export default function ContactPage() {
           <p className="font-sans text-[12px] uppercase tracking-[0.22em] text-[#181415]/40 mb-5">Prefer to browse first?</p>
           <div className="flex flex-wrap items-center justify-center gap-4">
             <Link
-              href="/pages/portfolio"
+              href="/portfolio"
               className="font-sans inline-flex items-center gap-2 rounded-full border border-[#181415]/20 px-6 py-3 text-sm font-semibold text-[#181415] transition-all hover:border-[#ff2c00] hover:text-[#ff2c00]"
             >
               View Portfolio
             </Link>
             <Link
-              href="/pages/collaborate-with-eri-in-germany"
+              href="/collaborate-with-eri-in-germany"
               className="font-sans inline-flex items-center gap-2 rounded-full border border-[#181415]/20 px-6 py-3 text-sm font-semibold text-[#181415] transition-all hover:border-[#ff2c00] hover:text-[#ff2c00]"
             >
               See Services <ArrowRight className="h-4 w-4" />

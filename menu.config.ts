@@ -1,10 +1,9 @@
-// Define the menu items
 export const mainMenu = {
-  about: "/pages/about",
+  about: "/about",
   blog: "/posts",
-  services: "/pages/collaborate-with-eri-in-germany",
-  portfolio: "/pages/portfolio",
-  contact: "/pages/contact",
+  services: "/collaborate-with-eri-in-germany",
+  portfolio: "/portfolio",
+  contact: "/contact",
 };
 
 export const contentMenu = {
