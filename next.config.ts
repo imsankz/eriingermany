@@ -4,7 +4,6 @@ const wordpressHostname = process.env.WORDPRESS_HOSTNAME;
 const wordpressUrl = process.env.WORDPRESS_URL;
 
 const nextConfig: NextConfig = {
-  output: "standalone",
   images: {
     remotePatterns: [
       // CDN hostname for eriingermany.com media (ExactDN/BunnyCDN)
